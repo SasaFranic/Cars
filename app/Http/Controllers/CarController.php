@@ -15,7 +15,7 @@ class CarController extends Controller
     {
         $cars = Car::all();
         return view('cars.index', compact('cars'));
-        //return 'radi index';
+
     }
 
     /**
@@ -31,33 +31,30 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate(
-            [
-                'make' => 'required|string|max:255',
-                'model' => 'required|string|max:255',
-                'year' => 'required|integer|min:1886|max:' . (date('Y') + 1),
-                'color' => 'required|string|max:50',
-                'user_id' => 'required|exists:users,id',
-            ],
-            [
-                'make.required' => 'Molimo unesite marku vozila.',
-                'model.required' => 'Molimo unesite model vozila.',
-                'year.required' => 'Molimo unesite godinu proizvodnje.',
-                'color.required' => 'Molimo unesite boju vozila.',
-                'user_id.required' => 'Molimo prijavite se.',
-            ]
-        );
+        $messages = [
+            'make.required' => 'Molimo unesite marku vozila.',
+            'model.required' => 'Molimo unesite model vozila.',
+            'year.required' => 'Molimo unesite godinu proizvodnje.',
+            'color.required' => 'Molimo unesite boju vozila.',
+            'user_id.required' => 'Molimo prijavite se.',
+        ];
 
-        Car::create([
-            'make' => $validatedData['make'],
-            'model' => $validatedData['model'],
-            'year' => $validatedData['year'],
-            'color' => $validatedData['color'],
-            'user_id' => Auth::user()->id,
-        ]);
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('error', 'Molimo prijavite se.');
+        }
 
-        return redirect()->route('cars.index')->with('success', 'Vozilo je uspješno dodano.');
+        $validatedData = $request->validate([
+            'make' => 'required|string|max:255',
+            'model' => 'required|string|max:255',
+            'year' => 'required|integer|min:1886|max:' . (date('Y') + 1),
+            'color' => 'required|string|max:50',
+        ], $messages);
 
+        $validatedData['user_id'] = Auth::id();
+
+        Car::create($validatedData);
+
+        return redirect()->route('cars.index')->with('success', 'Novo vozilo je uspješno dodano.');
     }
 
     /**
@@ -87,8 +84,12 @@ class CarController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Car $car)
     {
-        //
+        if ($car->user_id !== Auth::id()) {
+            abort(403);
+        }
+        $car->delete();
+        return redirect()->route('cars.index')->with('success', 'Vozilo uspješno obrisano.');
     }
 }

@@ -1524,8 +1524,8 @@
     <br><br>
     <nav>
         <ul>
-            <li><a href="/prijava" style="color:blue">Prijava</a></li>
-            <li><a href="/cars" style="color:blue">Vaši Automobili</a></li>
+            <li><a href="{{ route('login') }}" style="color:blue">Prijava</a></li>
+            <li><a href="{{ route('cars.index') }}" style="color:blue">Vaši Automobili</a></li>
         </ul>
     </nav>
 </body>

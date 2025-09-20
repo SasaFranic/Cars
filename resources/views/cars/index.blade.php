@@ -11,6 +11,13 @@
 
     <h1>Lista vozila</h1>
     <br><br>
+    @if (session('success'))
+        <div style="color: green; margin: 10px 0">{{ session('success') }}</div>
+    @endif
+    @if (session('error'))
+        <div style="color: red; margin: 10px 0">{{ session('error') }}</div>
+    @endif
+    <br><br>
     <ul>
         @forelse($cars as $car)
             <li>{{ $car->make }} {{ $car->model }} ({{ $car->year }}) - {{ $car->color }} - Vlasnik: {{ $car->user->name }}
