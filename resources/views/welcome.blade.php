@@ -1530,6 +1530,8 @@
         <br><br>
         <p style="color: darkolivegreen">Ovo je početna stranica za upravljanje vašim vozilima, molimo prijavite se kako
             bi pristupili svojim vozilima.</p>
+        <br><br>
+        <p style="color: red">Test kompletnog CICD pipeline-a</p>
     </nav>
 </body>
 
