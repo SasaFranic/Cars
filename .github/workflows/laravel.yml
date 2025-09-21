@@ -47,6 +47,10 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
+            - name: Check SSH key present
+              run: |
+                    test -n "${{ secrets.SSH_PRIVATE_KEY }}" || { echo "SSH_PRIVATE_KEY is not set. Exiting."; exit 1; }
+                    echo "SSH_PRIVATE_KEY present"
             - name: Deploy to server
               uses: appleboy/ssh-action@master
               with:
