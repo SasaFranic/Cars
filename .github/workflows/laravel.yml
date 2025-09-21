@@ -57,7 +57,7 @@ jobs:
               with:
                 host: ${{ secrets.SSH_HOST }}
                 username: ${{ secrets.SSH_USER }}
-                key: ${{ secrets.SSSH_PRIVATE_KEY_B64 }}
+                key: ${{ secrets.SSH_PRIVATE_KEY_B64 }}
                 script: |
                   cd /var/www/Cars
                   git pull origin main
