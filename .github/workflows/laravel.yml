@@ -1,0 +1,21 @@
+name: Laravel CI
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: read
+
+jobs:
+    Echo:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Echo Hello World!
+              run: echo "Hello World!"
+    Echo2:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Echo 2
+              run: echo "Hello x2!"
