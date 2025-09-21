@@ -1527,6 +1527,9 @@
             <li><a href="{{ route('login') }}" style="color:blue">Prijava</a></li>
             <li><a href="{{ route('cars.index') }}" style="color:blue">Vaši Automobili</a></li>
         </ul>
+        <br><br>
+        <p style="color: darkolivegreen">Ovo je početna stranica za upravljanje vašim vozilima, molimo prijavite se kako
+            bi pristupili svojim vozilima.</p>
     </nav>
 </body>
 
