@@ -47,18 +47,12 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - name: Check SSH key present
-              run: |
-                    test -n "${{ secrets.SSH_PRIVATE_KEY_B64 }}" || { echo "SSH_PRIVATE_KEY is not set. Exiting."; exit 1; }
-                    echo "SSH_PRIVATE_KEY present"
-            
             - name: Deploy to server
               uses: appleboy/ssh-action@master
               with:
                 host: ${{ secrets.SSH_HOST }}
                 username: ${{ secrets.SSH_USER }}
-                key_path: key.pem
-                script_stop: true
+                key: ${{ secrets.SSH_PRIVATE_KEY }}
                 script: |
                   cd /var/www/Cars
                   git pull origin main
