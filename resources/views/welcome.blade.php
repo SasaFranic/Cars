@@ -16,6 +16,75 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     @else
         <style>
+            body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f4f6f8;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        nav {
+            background: #ffffff;
+            padding: 30px 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            font-weight: 700;      
+            font-size: 1.2rem;     
+            color: #3498db;
+            padding: 15px 30px;     
+            border-radius: 12px;    
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            background-color: #3498db;
+            color: #fff;
+            transform: scale(1.05); 
+        }
+
+
+        p {
+            font-size: 1rem;
+            margin: 15px 0;
+        }
+
+        .info {
+            color: #556b2f; 
+        }
+
+        .coming-soon {
+            color: #e74c3c; 
+            font-weight: bold;
+        }
+
+
+
             /*! tailwindcss v4.0.7 | MIT License | https://tailwindcss.com */
             @layer theme {
 
@@ -1520,18 +1589,16 @@
 </head>
 
 <body>
-    <h1>Welcome</h1>
-    <br><br>
+    <h1>Dobrodošli na Portum stranicu</h1>
+
     <nav>
         <ul>
-            <li><a href="{{ route('login') }}" style="color:blue">Prijava</a></li>
-            <li><a href="{{ route('cars.index') }}" style="color:blue">Vaši Automobili</a></li>
+            <li><a href="{{ route('login') }}">Prijava</a></li>
+            <li><a href="{{ route('cars.index') }}">Vaši Automobili</a></li>
         </ul>
-        <br><br>
-        <p style="color: darkolivegreen">Ovo je početna stranica za upravljanje vašim vozilima, molimo prijavite se kako
-            bi pristupili svojim vozilima.</p>
-        <br><br>
-        <p style="color: red">Test kompletnog CICD pipeline-a</p>
+
+        <p class="info">Ovo je početna stranica za upravljanje vašim vozilima. Molimo prijavite se kako bi pristupili svojim vozilima.</p>
+        <p class="coming-soon">Uskoro nove mogućnosti</p>
     </nav>
 </body>
 
