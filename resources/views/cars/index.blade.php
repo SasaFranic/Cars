@@ -56,15 +56,35 @@
             padding: 15px 20px;
             margin-bottom: 15px;
             border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
         }
 
+        .actions {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .actions form {
+            margin: 0;
+        }
+
+        .car-info {
+            flex: 1;
+        }
+
         li form {
             margin: 0;
+        }
+
+        li .edit-button {
+            background-color: #19dc6aff;
+            color: #fff
         }
 
         li button {
@@ -118,12 +138,22 @@
     <ul>
         @forelse($cars as $car)
             <li>
-                <span>{{ $car->make }} {{ $car->model }} ({{ $car->year }}) - {{ $car->color }} - Vlasnik: {{ $car->user->name }}</span>
-                <form action="{{ route('cars.destroy', $car->id) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" onclick="return confirm('Jeste li sigurni da želite obrisati ovo vozilo?')">Obriši</button>
-                </form>
+                <span class="car-info">{{ $car->make }} {{ $car->model }} ({{ $car->year }}) - {{ $car->color }} - Vlasnik:
+                    {{ $car->user->name }}</span>
+
+                <div class="actions">
+                    <form action="{{ route('cars.edit', $car->id) }}" method="GET">
+                        @csrf
+                        @method('PUT')
+                        <button class="edit-button" type="submit">Uredi</button>
+                    </form>
+                    <form action="{{ route('cars.destroy', $car->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit"
+                            onclick="return confirm('Jeste li sigurni da želite obrisati ovo vozilo?')">Obriši</button>
+                    </form>
+                </div>
             </li>
         @empty
             <li>Nema dostupnih vozila u bazi.</li>
@@ -138,6 +168,7 @@
     @endauth
 
     <a href="{{ route('cars.create') }}" class="add-car">Dodaj novo vozilo</a>
+
 
 </body>
 
