@@ -58,6 +58,13 @@
         <a href="{{ route('login') }}" style="color:blue">Prijava</a>
 
     @endauth
+    <br><br>
+    @auth
+        <form action="{{ route('logout') }}" method="POST" style="display:inline">
+            @csrf
+            <button type="submit">Odjava</button>
+        </form>
+    @endauth
 
 
 

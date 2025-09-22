@@ -12,3 +12,5 @@ Route::post('/obrada', [AuthController::class, 'obrada'])->name('login.process')
 Route::middleware('auth')->group(function () {
     Route::resource('cars', CarController::class)->only(['index', 'create', 'store', 'destroy']);
 });
+
+Route::post('/odjava', [AuthController::class, 'odjava'])->name('logout')->middleware('auth');

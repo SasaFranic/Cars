@@ -31,6 +31,13 @@
         @empty
             <li>Nema dostupnih vozila u bazi.</li>
         @endforelse
+        <br><br>
+        @auth
+            <form action="{{ route('logout') }}" method="POST" style="display:inline">
+                @csrf
+                <button type="submit">Odjava</button>
+            </form>
+        @endauth
     </ul>
 
     <br><br>
