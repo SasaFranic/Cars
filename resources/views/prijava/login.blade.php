@@ -18,7 +18,13 @@
         </nav>
     @else
         <h1>Prijava</h1>
-
+        <br><br>
+        @if (session('success'))
+            <div style="color: green; margin: 10px 0">{{ session('success') }}</div>
+        @endif
+        @if (session('error'))
+            <div style="color: red; margin: 10px 0">{{ session('error') }}</div>
+        @endif
         <br><br>
         <form action="{{  url('/obrada') }}" method="post" style="border 1px solid black; max-width:400px; margin: auto">
             @csrf
